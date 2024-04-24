@@ -19,15 +19,18 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: npm install --prefix my-website
+        working-directory: my-website
+        run: npm install
 
       - name: Build website
-        run: npm run build --prefix my-website
+        working-directory: my-website
+        run: npm run build
 
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
+        working-directory: my-website
         with:
-          path: my-website/build
+          path: build
 
   deploy:
     name: Deploy to GitHub Pages
